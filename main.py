@@ -27,6 +27,28 @@ RED_HIT = pygame.USEREVENT +2
 BLUE_WARRIOR_IMAGE = pygame.image.load(os.path.join('Assets','bluewarrior.png'))
 RED_WARRIOR_IMAGE = pygame.image.load(os.path.join('Assets','redwarrior.png'))
 
+def draw_window(blue,red, blue_bullets, red_bullets, red_heath, blue_heath):
+    #WIN.fill(CYAN)
+    WIN.blit(BACKGROUND, (0,0))
+    WIN.blit(BLUE_WARRIOR_IMAGE,(blue.x, blue.y))
+    WIN.blit(RED_WARRIOR_IMAGE,(red.x,red.y))
+    
+    red_heath_text = HEALTH_FONT.render("HEALTH:"+ str(red_heath), 1, BLACK)
+    blue_heath_text = HEALTH_FONT.render("HEALTH:"+ str(blue_heath), 1, BLACK)
+    
+    WIN.blit(red_heath_text, (WIDTH- red_heath_text.get_width() - 10, 10))
+    WIN.blit(blue_heath_text, (10,10))
+
+    for bullet in red_bullets:
+        pygame.draw.rect(WIN, RED, bullet)
+
+    for bullet in blue_bullets:
+        pygame.draw.rect(WIN, BLUE, bullet)
+
+    pygame.draw.rect(WIN, BLACK, BORDER)
+    pygame.display.update()
+
+
 
 #BLUE MOVEMENTS
 def blue_handle_movements(keys_pressed, blue): 
